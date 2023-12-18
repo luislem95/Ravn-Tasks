@@ -5,7 +5,7 @@ import TagDisplay from './TagDisplay';
 
 
 
-export default function Tasks({ state,status}) {
+export default function Tasks({ state,status,handleDelete}) {
   const getStatus = (status) => {
     return state.lista.filter(task => task.status === status)
 }
