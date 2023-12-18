@@ -4,7 +4,7 @@ import Convert from "../Tasks/Convert";
 import TagDisplay from "../Tasks/TagDisplay";
 
 export default function MyTasks({ state, status }) {
-    console.log(state)
+
   const uniqueTasks = state.lista.reduce((unique, task) => {
     const existingTask = unique.find((item) => item.status === task.status);
 

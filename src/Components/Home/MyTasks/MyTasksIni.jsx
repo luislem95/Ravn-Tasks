@@ -55,7 +55,8 @@ const id_=selectedUser.id;
           });
         }
       }
-      console.log('state',state)
+     
+   
 
 useEffect(() => {
     if (id_) {

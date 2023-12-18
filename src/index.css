@@ -50,7 +50,9 @@ border-right: 4px solid rgba(218, 88, 75, 1);
     color:rgba(218, 88, 75, 1);
     stroke: rgba(218, 88, 75, 1);
   }
-
+  .w-99{
+    width: 50rem;
+  }
 
 
 

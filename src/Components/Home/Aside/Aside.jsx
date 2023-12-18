@@ -3,7 +3,7 @@ import ravn from "../../../Resources/3x/ravn.png";
 import { Link } from "react-router-dom";
 
 export default function Aside({ state, dataUser,setSelectedContent,selectedContent}) {
-  console.log("selectedContent Aside", selectedContent);
+
   const handleDashboardClick = () => {
     setSelectedContent("Dashboard");
   };

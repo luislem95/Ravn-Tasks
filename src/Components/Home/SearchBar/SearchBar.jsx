@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function SearchBar({ dataUser }) {
-  console.log("dataUser", dataUser);
+
 
   return (
     <div className="flex justify-end  m-6 ">
@@ -27,7 +27,7 @@ export default function SearchBar({ dataUser }) {
         />        */}
          <img
         src='https://scontent.fsal1-1.fna.fbcdn.net/v/t1.18169-9/24899957_1755500284755618_3962460758694462306_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7a1959&_nc_ohc=jD_WlA0d9rUAX-7yL1V&_nc_ht=scontent.fsal1-1.fna&oh=00_AfAsAPad5EB9BnhLEZHtyB8Hxn8g-9TCHtHovwF9jNzgqA&oe=65A63963'
-        alt={dataUser.selectedUser.avatar}
+        alt='imagen profile'
         className="w-8 h-8 rounded-full"
       />
       </div>
