@@ -127,11 +127,12 @@ export default function HomeIni(selectedUser, id) {
         setTask(name, dueDate, status, assigneeId, pointEstimate, tags);
       };
     // ---------------------------------------------DELETE TASK---------------------------------------------------------------------------------------------------------------------------------
-    async function setDelete(id_) {
+    async function setDelete(id) {
 
       const deleteTask = `
         mutation DeleteTask($id: String!) {
-          deleteTask(input: {id: $id
+          deleteTask(input: {
+            id:$id
           }) {
             id
             name
@@ -153,13 +154,13 @@ export default function HomeIni(selectedUser, id) {
       `;
     
       const variables = {
-        id_
+        id
       };
       console.log('Mutation:', deleteTask);
       console.log('Variables:', variables);
       try {
         const response = await FetchComponent({ query: deleteTask, variables });
-    
+        getData()
         if (!response.ok) {
           throw new Error(`Error al realizar la solicitud: ${response.status} ${response.statusText}`);
         }
@@ -171,8 +172,8 @@ export default function HomeIni(selectedUser, id) {
       }
     }
     
-    const handleDelete = (id_) => {
-      setDelete(id_);
+    const handleDelete = (id) => {
+      setDelete(id);
     };
     useEffect(() => {
         getData(null);
