@@ -5,6 +5,7 @@ import Titles from "./Titles";
 export default function TitlesIni({ 
   state,
   handleDelete,
+  uniqueLabels
       }) {
    
   // Filtrar objetos duplicados
@@ -23,6 +24,7 @@ export default function TitlesIni({
        data={uniqueTasks} 
        state={state}
        handleDelete={handleDelete}
+       uniqueLabels={uniqueLabels}
        />
     </div>
   );

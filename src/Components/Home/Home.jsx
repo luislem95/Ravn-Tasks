@@ -42,7 +42,7 @@ export default function Home({ state , selectedUser, uniqueLabels,handleSetTask,
      {/* Contenido dinámico según selectedContent */}
      {selectedContent === "Dashboard" ? (
           <div className="min-w-min">
-            <TitlesIni state={state} handleDelete={handleDelete}/>
+            <TitlesIni state={state} handleDelete={handleDelete} uniqueLabels={uniqueLabels}/>
           </div>
         ) : (
           <div className="">

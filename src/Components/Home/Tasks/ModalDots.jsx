@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import InsertUpdate from "../InsertUpdate.js/InsertUpdate";
 
-export default function ModalDots({ task, handleDelete }) {
+export default function ModalDots({ task, handleDelete, uniqueLabels, state }) {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isEditClicked, setEditClicked] = useState(false);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -24,10 +26,11 @@ export default function ModalDots({ task, handleDelete }) {
 
   const closeModal = () => {
     setModalOpen(false);
+    setEditClicked(false); // Reset the edit clicked state
   };
 
   const handleEdit = () => {
-    closeModal();
+    setEditClicked(true);
   };
 
   const handleDeleteClick = (id) => {
@@ -56,12 +59,61 @@ export default function ModalDots({ task, handleDelete }) {
       {isModalOpen && (
         <div>
           <div className="modal-overlay" onClick={closeModal}></div>
-          <div className="modal" ref={modalRef}>
-            <button onClick={handleEdit}>Edit</button>
-            <button  onClick={() => handleDeleteClick(task.id)}>Delete</button>
+          <div className="modal bg-neutral3 pl-4 pr-4 p-3 z-10 absolute border rounded-lg" ref={modalRef}>
+            <div className="flex items-center justify-start cursor-pointer"    onClick={handleEdit}>
+              <svg
+                class="w-4 h-4 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 21 21"
+             
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279"
+                />
+              </svg>
+              <div className="ml-2 cursor-pointer">Edit</div>
+            </div>
+            {isEditClicked && (
+              <div className="absolute">
+                <InsertUpdate
+                  task={task}
+                  state={state}
+                  closeModal={closeModal}
+                  uniqueLabels={uniqueLabels}
+                />
+                </div>
+              )}
+            <div className="flex items-center justify-center cursor-pointer" onClick={() => handleDeleteClick(task.id)}>
+              <svg
+                class="w-4 h-4 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 18 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"
+                />
+              </svg>
+              <div className="ml-2 cursor-pointer">Delete</div>
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 }
+
+
+
+
