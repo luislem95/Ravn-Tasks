@@ -68,3 +68,67 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Project Name
+
+## Description
+
+Brief description of the purpose and features of the application.
+
+## Setup and Running Instructions
+
+1. Clone this repository.
+2. Install dependencies with `npm install`.
+3. Configure environment variables in a `.env` file.
+4. Run the application with `npm start`.
+   In the project directory, you can run:
+
+### `npm start`
+
+### `npm run eject`
+
+### `npm run build` fails to minify
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+## Screenshots
+
+![Screenshot 1](./src/Resources/imagenes%20Ravn/1.png)
+![Screenshot 2](./src/Resources/imagenes%20Ravn/2.png)
+![Screenshot 3](./src/Resources/imagenes%20Ravn/3.png)
+![Screenshot 4](./src/Resources/imagenes%20Ravn/4.png)
+![Screenshot 5](./src/Resources/imagenes%20Ravn/5.png)
+![Screenshot 6](./src/Resources/imagenes%20Ravn/6.png)
+![Screenshot 7](./src/Resources/imagenes%20Ravn/7.png)
+![Screenshot 8](./src/Resources/imagenes%20Ravn/8.png)
+![Screenshot 9](./src/Resources/imagenes%20Ravn/9.png)
+![Screenshot 10](./src/Resources/imagenes%20Ravn/10.png)
+![Screenshot 11](./src/Resources/imagenes%20Ravn/11.png)
+![Screenshot 12](./src/Resources/imagenes%20Ravn/12.png)
+![Screenshot 13](./src/Resources/imagenes%20Ravn/13.png)
+
+## Development Decisions
+
+- **Technological Stack:** I chose React.js for its comprehensive features and my personal preference.
+- **Styling Library:** Tailwind CSS was recommended by my interviewer, and I found it to be a fantastic choice for its simplicity and flexibility.
+
+## Technologies Used
+
+- React.js
+- Tailwind CSS
+- Node.js
+- GraphQL
+- ...
+
+## Additional Information
+
+- Design patterns used.
+- Other relevant points.
+
+## Link to Hosted Project
+
+[Link to my GitHub ](https://github.com/luislem95/Ravn-Tasks.git)
