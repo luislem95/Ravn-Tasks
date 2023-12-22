@@ -20,18 +20,23 @@ function DraggableTask({ task, index, status,moveTask, handleUpdate, handleDelet
   const [, drop] = useDrop({
     accept: 'TASK',
     hover: (draggedItem) => {
+      console.log('Hovering over drop target'); // Agrega esta línea para verificar si la función hover se está llamando
+      console.log('Dragged Item:', draggedItem);
       if (draggedItem.index !== index) {
         moveTask(draggedItem.index, index);
         draggedItem.index = index;
       }
     },
   });
+  
+  
 
   return (
-    <div ref={(node) => drag(drop(node))} style={{ opacity: isDragging ? 0.5 : 1 }}>
+<div>
          {getStatus(status).map((task, index) => (
             <div className="h-52 p-4 bg-neutral4 rounded-md text-white overflow-auto" key={task.id} style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
            <div className="flex justify-between items-center">
+           <div ref={(node) => drag(drop(node))} style={{ opacity: isDragging ? 0.5 : 1 }}>
                  <div className="w-8/12 text-base mt-3">    {task.name}  </div>
                  <div className="mt-3">
                   <ModalDots task={task} handleDelete={handleDelete} uniqueLabels={uniqueLabels}state={state} handleUpdate={handleUpdate}/>
@@ -48,6 +53,7 @@ function DraggableTask({ task, index, status,moveTask, handleUpdate, handleDelet
                  <div className="mt-3">   <TagDisplay tags={task.tags} /> </div>
                  {/* <div className="overflow-hidden mt-4">  <img src={task.creator.avatar}  alt={`profile photo ${task.creator.fullName}`} /> </div> */}
                  <div className="overflow-hidden mt-4 rounded-full w-10 h-10">  <img src="https://www.educima.com/imagen-pensar-dl30340.jpg"  alt={`profile photo ${task.creator.fullName}`} /> </div>
+                 </div>
               </div>
              
           ))}

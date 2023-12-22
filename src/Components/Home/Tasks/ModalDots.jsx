@@ -4,6 +4,7 @@ import InsertUpdate from "../InsertUpdate.js/InsertUpdate";
 export default function ModalDots({ task, handleDelete, uniqueLabels, state ,handleUpdate}) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isEditClicked, setEditClicked] = useState(false);
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -33,10 +34,19 @@ export default function ModalDots({ task, handleDelete, uniqueLabels, state ,han
     setEditClicked(true);
   };
 
-  const handleDeleteClick = (id) => {
-    handleDelete(id);
+  const handleDeleteClick = () => {
+    setConfirmationOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setConfirmationOpen(false);
+    handleDelete(task.id);
     closeModal();
   };
+
+const handleCancelDelete = () => {
+  setConfirmationOpen(false);
+};
 
   return (
     <div className="">
@@ -107,6 +117,25 @@ export default function ModalDots({ task, handleDelete, uniqueLabels, state ,han
                 />
               </svg>
               <div className="ml-2 cursor-pointer">Delete</div>
+         
+
+            </div>
+          </div>
+        </div>
+        
+      )}
+        {isConfirmationOpen && (
+        <div>
+          <div className="modal-overlay" onClick={handleCancelDelete}></div>
+          <div className="modal bg-neutral3 p-4 z-20 absolute border rounded-lg" ref={modalRef}>
+            <div className="mb-4">¿Estás seguro de que quieres eliminar esta tarea?</div>
+            <div className="flex justify-center space-x-4">
+              <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleConfirmDelete}>
+                Sí
+              </button>
+              <button className="bg-gray-300 text-gray-700 px-4 py-2 rounded" onClick={handleCancelDelete}>
+                No
+              </button>
             </div>
           </div>
         </div>

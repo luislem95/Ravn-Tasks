@@ -12,7 +12,7 @@ export default function Tasks({ state,status,handleDelete,uniqueLabels,handleUpd
 }
 
   return (
-    <div className="grid grid-rows gap-3 m-6">
+    <div className="grid grid-rows gap-3 m-1">
          {getStatus(status).map((task, index) => (
             <div className="h-52 px-5 py-2 bg-neutral4 rounded-md text-white overflow-auto" key={task.id} style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
            <div className="flex justify-between items-center">
@@ -25,7 +25,7 @@ export default function Tasks({ state,status,handleDelete,uniqueLabels,handleUpd
                   </div>
                   </div>
                   <div className="flex justify-between items-center mt-3">
-                  <div className="font-semibold">   <Convert task={task.pointEstimate} /> </div>
+                  <div className="font-semibo">   <Convert task={task.pointEstimate} /> </div>
                  <div className="">   <DateDisplay dueDate={task.dueDate} /> </div>
                   </div>
 

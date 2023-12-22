@@ -2,7 +2,7 @@ import React from "react";
 import DraggableTask from "../Home/Tasks/DraggableTask";
 
 
-export default function Titles({ data, state, handleDelete, uniqueLabels, handleUpdate }) {
+export default function TitlesDrppable({ data, state, handleDelete, uniqueLabels, handleUpdate }) {
   // Función para mover tareas
   const moveTask = (dragIndex, hoverIndex) => {
     // Lógica para mover las tareas (actualiza el estado, etc.)

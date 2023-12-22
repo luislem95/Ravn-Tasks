@@ -1,5 +1,6 @@
 import React from "react";
 import Titles from "./Titles";
+import TitlesDrppable from "./TitleDroppable";
 
 
 export default function TitlesIni({ 
@@ -20,7 +21,7 @@ export default function TitlesIni({
 
 
   return (
-    <div className="">
+    <div className="w-full">
       <Titles
        data={uniqueTasks} 
        state={state}
@@ -28,6 +29,13 @@ export default function TitlesIni({
        uniqueLabels={uniqueLabels}
        handleUpdate={handleUpdate}
        />
+       {/* <TitlesDrppable
+              data={uniqueTasks} 
+              state={state}
+              handleDelete={handleDelete}
+              uniqueLabels={uniqueLabels}
+              handleUpdate={handleUpdate}
+              /> */}
     </div>
   );
 }

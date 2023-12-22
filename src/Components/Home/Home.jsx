@@ -29,7 +29,7 @@ export default function Home({ state , selectedUser, uniqueLabels,handleSetTask,
 
   return (
     <div className="w-full h-full flex direction-row justify-center" >
-            <div className=" w-56">
+            <div className=" w-56 mr-6 ml-9">
               <Aside state={state} dataUser={selectedUser} setSelectedContent={setSelectedContent} selectedContent={selectedContent}/>
             </div>
 

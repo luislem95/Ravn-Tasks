@@ -9,7 +9,7 @@ export default function Titles({ data, state, handleDelete, uniqueLabels, handle
         const taskCount = tasksForStatus.length.toString().length == 1 ? `0${tasksForStatus.length}` : tasksForStatus.length.toString();
 
         return (
-          <div key={index} className="flex flex-col items-center w-full mb-4 ">
+          <div key={index} className="flex flex-col items-center w-full mb-4">
             <div>
               <h4 className="text-white font-bold">
                 {taskStatus.status} ({taskCount})
