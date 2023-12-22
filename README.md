@@ -131,4 +131,4 @@ Your app is ready to be deployed!
 
 ## Link to Hosted Project
 
-[Link to my GitHub ](https://github.com/luislem95/Ravn-Tasks.git)
+[Link to the Luis Lemus GitHub repository ](https://github.com/luislem95/Ravn-Tasks.git)
