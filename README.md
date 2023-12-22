@@ -69,11 +69,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Project Name
+# Task-Manager
 
 ## Description
 
-Brief description of the purpose and features of the application.
+This application serves as a comprehensive task management platform for organizing and overseeing all tasks within a user group. Users can seamlessly add, delete, and edit tasks. The platform also features a personal area where users can view their own tasks and personal information. Additionally, users have the ability to assign tasks to others within the group, providing a collaborative and efficient environment.
 
 ## Setup and Running Instructions
 
