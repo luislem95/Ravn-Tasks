@@ -23,7 +23,7 @@ export default function Modal({
   const handleMyTasksClick = () => {
     setSelectedContent("MyTasks");
   };
-
+const insert= true
   return (
     <div className=" flex justify-between items-center ml-6 mr-6 ">
     <div className="flex ">
@@ -67,7 +67,9 @@ export default function Modal({
   dataUser={dataUser}
   closeModal={closeModal}
   uniqueLabels={uniqueLabels}
-  handleSetTask={handleSetTask}/>
+  handleSetTask={handleSetTask}
+  insert={insert}
+  />
 
 </div>
 </div>

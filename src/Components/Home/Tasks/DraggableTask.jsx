@@ -1,22 +1,38 @@
-import React from "react";
+import { useDrag, useDrop } from 'react-dnd';
+import Convert from './Convert';
 import DateDisplay from './DateDisplay';
-import Convert from "./Convert";
 import TagDisplay from './TagDisplay';
-import ModalDots from "./ModalDots";
+import ModalDots from './ModalDots';
 
+function DraggableTask({ task, index, status,moveTask, handleUpdate, handleDelete, uniqueLabels, state }) {
+    const getStatus = (status) => {
+        return state.lista.filter(task => task.status === status)
+    }
+    
+  const [{ isDragging }, drag] = useDrag({
+    type: 'TASK',
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
-
-export default function Tasks({ state,status,handleDelete,uniqueLabels,handleUpdate}) {
-  const getStatus = (status) => {
-    return state.lista.filter(task => task.status === status)
-}
+  const [, drop] = useDrop({
+    accept: 'TASK',
+    hover: (draggedItem) => {
+      if (draggedItem.index !== index) {
+        moveTask(draggedItem.index, index);
+        draggedItem.index = index;
+      }
+    },
+  });
 
   return (
-    <div className="grid grid-rows gap-3 m-6">
+    <div ref={(node) => drag(drop(node))} style={{ opacity: isDragging ? 0.5 : 1 }}>
          {getStatus(status).map((task, index) => (
-            <div className="h-52 px-5 py-2 bg-neutral4 rounded-md text-white overflow-auto" key={task.id} style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
+            <div className="h-52 p-4 bg-neutral4 rounded-md text-white overflow-auto" key={task.id} style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
            <div className="flex justify-between items-center">
-                 <div className="w-8/12 text-base mt-3 font-bold">    {task.name}  </div>
+                 <div className="w-8/12 text-base mt-3">    {task.name}  </div>
                  <div className="mt-3">
                   <ModalDots task={task} handleDelete={handleDelete} uniqueLabels={uniqueLabels}state={state} handleUpdate={handleUpdate}/>
                   {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -25,7 +41,7 @@ export default function Tasks({ state,status,handleDelete,uniqueLabels,handleUpd
                   </div>
                   </div>
                   <div className="flex justify-between items-center mt-3">
-                  <div className="font-semibold">   <Convert task={task.pointEstimate} /> </div>
+                  <div className="">   <Convert task={task.pointEstimate} /> </div>
                  <div className="">   <DateDisplay dueDate={task.dueDate} /> </div>
                   </div>
 
@@ -36,6 +52,8 @@ export default function Tasks({ state,status,handleDelete,uniqueLabels,handleUpd
              
           ))}
     </div>
-
+    
   );
 }
+
+export default DraggableTask;

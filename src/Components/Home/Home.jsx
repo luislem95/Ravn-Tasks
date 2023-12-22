@@ -7,7 +7,7 @@ import MyTasksIni from "./MyTasks/MyTasksIni";
 import Modal from "./Modal/Modal";
 
 
-export default function Home({ state , selectedUser, uniqueLabels,handleSetTask, handleDelete}) {
+export default function Home({ state , selectedUser, uniqueLabels,handleSetTask, handleDelete,handleUpdate,handleSearch}) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -36,13 +36,13 @@ export default function Home({ state , selectedUser, uniqueLabels,handleSetTask,
 
         <div className="w-full ">
           <div className="h-min ">
-            <SearchBar dataUser={selectedUser}/>
+            <SearchBar dataUser={selectedUser} handleSearch={handleSearch}/>
           </div>
         <Modal openModal={openModal} isModalOpen={isModalOpen} closeModal={closeModal} state={state} setSelectedContent={setSelectedContent} selectedContent={selectedContent} uniqueLabels={uniqueLabels} handleSetTask={handleSetTask}/>
      {/* Contenido dinámico según selectedContent */}
      {selectedContent === "Dashboard" ? (
           <div className="min-w-min">
-            <TitlesIni state={state} handleDelete={handleDelete} uniqueLabels={uniqueLabels}/>
+            <TitlesIni state={state} handleDelete={handleDelete} uniqueLabels={uniqueLabels} handleUpdate={handleUpdate}/>
           </div>
         ) : (
           <div className="">

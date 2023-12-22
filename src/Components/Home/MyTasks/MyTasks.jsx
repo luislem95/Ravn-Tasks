@@ -30,11 +30,14 @@ export default function MyTasks({ state, status }) {
           </thead>
           <tbody>
             {uniqueTasks.map((task, index) => (
+              
               <React.Fragment key={index}>
                 <tr className="row">
                   <td className="col-12" style={{ color: "#f1f1f1" }}>
                     <div className="flex justify-Between cSecundario pb-4 pt-4">
                       <h4>{task.status}</h4>
+                      <p>({String(state.lista.filter((list) => list.status === task.status).length).padStart(2, '0')})</p>
+
                     </div>
                   </td>
                 </tr>

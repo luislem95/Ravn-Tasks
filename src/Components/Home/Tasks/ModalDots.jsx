@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import InsertUpdate from "../InsertUpdate.js/InsertUpdate";
 
-export default function ModalDots({ task, handleDelete, uniqueLabels, state }) {
+export default function ModalDots({ task, handleDelete, uniqueLabels, state ,handleUpdate}) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isEditClicked, setEditClicked] = useState(false);
   const modalRef = useRef(null);
@@ -86,6 +86,7 @@ export default function ModalDots({ task, handleDelete, uniqueLabels, state }) {
                   state={state}
                   closeModal={closeModal}
                   uniqueLabels={uniqueLabels}
+                  handleUpdate={handleUpdate}
                 />
                 </div>
               )}

@@ -13,12 +13,31 @@ export default function InsertUpdate({
   closeModal,
   uniqueLabels,
   handleSetTask,
+  insert,
+  handleUpdate,
 task}) {
+
+
+
 //asignacion a mis variables tanto para cuando es un nuevo task o edicion 
   const [taskTitle, setTaskTitle] = useState(task && task.name ? task.name : "");
-  const [assignee, setAssignee] = useState(task && task.fullName ? task.fullName : "");
+  const [assignee, setAssignee] = useState(task && task.assignee ? task.assignee : "");
   const [estimate, setEstimate] = useState(task && task.pointEstimate ? task.pointEstimate : "");
-  const [selectedLabels, setSelectedLabels] = useState(task && task.tags ? task.tags : "");
+  const reverseMappings = {
+    'ZERO': 0,
+    'ONE': 1,
+    'TWO': 2,
+    'FOUR': 4,
+    'EIGHT': 8,
+  };
+
+  const estimateNumber = estimate ? reverseMappings[estimate] || '0' : '';
+
+
+
+
+  const [selectedLabels, setSelectedLabels] = useState(task && task.tags ? task.tags : []);
+  const [status, setStatus] = useState(task && task.status ? task.status : "");
 
   const initialDueDate = task && task.dueDate ? new Date(task.dueDate) : null;
   const [selectedDate, setSelectedDate] = useState(initialDueDate);
@@ -28,7 +47,7 @@ task}) {
   const [isAssigneeDropdownOpen, setAssigneeDropdownOpen] = useState(false);
   const [isLabelDropdownOpen, setLabelDropdownOpen] = useState(false);
   const [isDueDateDropdownOpen, setDueDateDropdownOpen] = useState(false);
-
+console.log('selectedLabels',selectedLabels)
   const handleDropdownToggle = (dropdownType) => {
     switch (dropdownType) {
       case "estimate":
@@ -49,9 +68,9 @@ task}) {
   };
   const handleLabelSelection = (label) => {
     const isSelected = selectedLabels.includes(label);
-
+  
     if (isSelected) {
-      setSelectedLabels(selectedLabels.filter((selected) => selected !== label));
+      setSelectedLabels(selectedLabels.filter((selected) => selected != label));
     } else {
       setSelectedLabels([...selectedLabels, label]);
     }
@@ -65,23 +84,20 @@ task}) {
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const handleCreateClick = () => {
-  // Mapear los valores de UI a los valores deseados
-  const estimateMappings = {
-    "0 Points": 'ZERO',
-    "1 Points": 'ONE',
-    "2 Points": 'TWO',
-    "4 Points": 'FOUR',
-    "8 Points": 'EIGHT',
-  };
-  const estimateNumber = parseInt(estimate, 10);
-  const mappedEstimate = estimateMappings[`${estimateNumber} Points`] || 'UNKNOWN';
   const formattedDate = format(selectedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
-  console.log('send to api', taskTitle, 'BACKLOG', formattedDate, assignee.id, mappedEstimate, selectedLabels);
+   console.log('send to api', taskTitle, 'BACKLOG', formattedDate, assignee.id, estimate, selectedLabels);
 
-  handleSetTask(taskTitle, 'BACKLOG', formattedDate, assignee.id, mappedEstimate, selectedLabels);
+  handleSetTask(taskTitle, 'BACKLOG', formattedDate, assignee.id, estimate, selectedLabels);
   closeModal()
 };
+
+const handleUpdateClick =()=>{ 
+  const formattedDate = selectedDate ? format(selectedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx") : null;
+
+  console.log('send to api',task.id,taskTitle, formattedDate, status, assignee.id, estimate,selectedLabels);
+  handleUpdate(task.id,taskTitle, status,formattedDate, assignee.id, estimate,selectedLabels)
+}
 const handleCancel=()=>{
 setTaskTitle('')
 setAssignee('')
@@ -107,6 +123,7 @@ closeModal()
         isEstimateDropdownOpen ? "border-b border-gray-500" : ""
       }`}
       type="button"
+      required
       onClick={() => handleDropdownToggle("estimate")}
     >
 <div className="flex items-center justify-between">
@@ -119,7 +136,7 @@ closeModal()
 </div>
 
 {/* El texto "Estimate" */}
-{estimate ? ` ${estimate} ` : "Estimate"}
+{estimateNumber ? ` ${estimateNumber} Points ` : "Estimate"}
 </div>
  
        {isEstimateDropdownOpen && (
@@ -132,11 +149,11 @@ closeModal()
                 aria-labelledby="dropdown-button-estimate"
               >
                 <label className="text-neutral4 text-lg">Estimate</label>
-                <li onClick={() => handleEstimateSelection("0 Points")}>0 Points</li>
-                <li onClick={() => handleEstimateSelection("1 Points")}>1 Points</li>
-                <li onClick={() => handleEstimateSelection("2 Points")}>2 Points</li>
-                <li onClick={() => handleEstimateSelection("4 Points")}>4 Points</li>
-                <li onClick={() => handleEstimateSelection("8 Points")}>8 Points</li>
+                <li onClick={() => handleEstimateSelection("ZERO")}>0 Points</li>
+                <li onClick={() => handleEstimateSelection("ONE")}>1 Points</li>
+                <li onClick={() => handleEstimateSelection("TWO")}>2 Points</li>
+                <li onClick={() => handleEstimateSelection("FOUR")}>4 Points</li>
+                <li onClick={() => handleEstimateSelection("EIGHT")}>8 Points</li>
               </ul>
             </div>
           )}
@@ -148,6 +165,7 @@ closeModal()
               isAssigneeDropdownOpen ? "border-b border-gray-500" : ""
             }`}
             type="button"
+            required
             onClick={() => handleDropdownToggle("assignee")}
           >
        
@@ -191,6 +209,7 @@ closeModal()
     {/* Label Dropdown */}
     <button
 id="dropdown-button-label"
+required
 className={`flex-shrink-0 z-10 w-44 inline-flex items-center justify-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 dark:text-white rounded-lg hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-700 ${
 isLabelDropdownOpen ? "border-b border-gray-500" : ""
 }`}
@@ -219,6 +238,7 @@ onClick={() => handleDropdownToggle("label")}
     {uniqueLabels.map((label, index) => (
       <li key={index} className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
         <input
+        required
           type="checkbox"
           id={`label-${index}`}
           checked={selectedLabels.includes(label)}
@@ -233,6 +253,7 @@ onClick={() => handleDropdownToggle("label")}
 </button>
 {/* Due Date Dropdown */}
 <DatePicker
+required
   selected={selectedDate instanceof Date ? selectedDate : null}
   onChange={(date) => setSelectedDate(date)}
   placeholderText="Select date"
@@ -241,7 +262,13 @@ onClick={() => handleDropdownToggle("label")}
 </div>
 <div className="flex justify-end mt-8 mr-8 pb-4">
 <button type="button"    className={`flex-shrink-0  inline-flex items-end bg-transparent py-2.5 px-4 text-sm font-medium text-center  dark:text-white rounded-lg    `} onClick={() => handleCancel()}>Cancel</button>
+{
+  insert ? (
 <button type="button" className={`flex-shrink-0  inline-flex items-end py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-primary4 dark:text-white rounded-lg hover:bg-primary4 dark:bg-primary4 dark:hover:bg-primary4 `} onClick={() => handleCreateClick()}>Create</button>
+):(
+  <button type="button" className={`flex-shrink-0  inline-flex items-end py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-primary4 dark:text-white rounded-lg hover:bg-primary4 dark:bg-primary4 dark:hover:bg-primary4 `} onClick={() => handleUpdateClick()}>UpDate</button>
+)}
+
 </div>
 </form>;
 }

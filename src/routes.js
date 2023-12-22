@@ -37,7 +37,13 @@ export default function Rutas() {
       />
       <Route
         path="/home"
-        element={<HomeIni selectedUser={selectedUser} id={id} />}
+        element={
+          <HomeIni
+            selectedUser={selectedUser}
+            id={id}
+            handleUserClick={handleUserClick}
+          />
+        }
       />
       <Route
         path="/mytasks"
